@@ -53,10 +53,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   tags = var.tags
 
   viewer_certificate {
-    cloudfront_default_certificate = false
-    iam_certificate_id             = var.iam_certificate_id
-    ssl_support_method             = "sni-only"
-    minimum_protocol_version       = "TLSv1.2_2018"
+    acm_certificate_arn      = var.acm_certificate_arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2018"
   }
 
   custom_error_response {

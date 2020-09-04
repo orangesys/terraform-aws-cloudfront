@@ -29,8 +29,8 @@ variable "lambda_arn" {
   type        = string
 }
 
-variable "iam_certificate_id" {
-  description = "The IAM certificate identifier of the custom viewer certificate for this distribution if you are using a custom domain"
+variable "acm_certificate_arn" {
+  description = "The ARN of the AWS Certificate Manager certificate that you wish to use with this distribution. "
   type        = string
 }
 
