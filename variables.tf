@@ -1,0 +1,37 @@
+variable "bucket_regional_domain_name" {
+  description = "bucket regional domain name"
+  type        = string
+}
+
+variable "origin_id" {
+  description = "A unique identifier for the origin."
+  type        = string
+}
+
+variable "aliases" {
+  description = "Extra CNAMEs (alternate domain names), if any, for this distribution."
+  type        = list(string)
+}
+
+variable "price_class" {
+  description = "The price class for this distribution. One of PriceClass_All, PriceClass_200, PriceClass_100"
+  type        = string
+  default     = "PriceClass_200"
+}
+
+variable "tags" {
+  description = "A map of tags to assign to the resource"
+  type        = map(string)
+}
+
+variable "lambda_arn" {
+  description = "ARN of the Lambda function"
+  type        = string
+}
+
+variable "iam_certificate_id" {
+  description = "The IAM certificate identifier of the custom viewer certificate for this distribution if you are using a custom domain"
+  type        = string
+}
+
+
