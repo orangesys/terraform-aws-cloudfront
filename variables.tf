@@ -3,11 +3,6 @@ variable "bucket_regional_domain_name" {
   type        = string
 }
 
-variable "origin_access_identity" {
-  description = "Creates an Amazon CloudFront origin access identity."
-  type        = string
-}
-
 variable "origin_id" {
   description = "A unique identifier for the origin."
   type        = string

@@ -2,7 +2,6 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
   comment = var.origin_access_identity
 }
 
-
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = var.bucket_regional_domain_name
