@@ -44,6 +44,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     viewer_protocol_policy = "redirect-to-https"
 
     lambda_function_association {
+      count        = var.lambda_arn != "" ? 1 : 0
       event_type   = "viewer-request"
       lambda_arn   = var.lambda_arn
       include_body = false
