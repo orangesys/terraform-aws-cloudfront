@@ -44,7 +44,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     viewer_protocol_policy = "redirect-to-https"
 
     dynamic "lambda_function_association" {
-      for_each = tolist([var.lambda_arn])
+      for_each = var.lambda_arn != "" ? [var.lambda_arn] : []
       content {
         event_type   = "viewer-request"
         lambda_arn   = lambda_function_association.value
