@@ -32,6 +32,7 @@ variable "tags" {
 variable "lambda_arn" {
   description = "ARN of the Lambda function"
   type        = string
+  default     = ""
 }
 
 variable "acm_certificate_arn" {
