@@ -55,32 +55,34 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
-  ordered_cache_behavior {
-    count            = var.stop_search_robots_arn != "" ? 1 : 0
-    path_pattern     = "/robots.txt"
-    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = var.origin_id
+  dynamic "ordered_cache_behavior" {
+    count = var.stop_search_robots_arn != "" ? 1 : 0
+    content {
+      path_pattern     = "/robots.txt"
+      allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+      cached_methods   = ["GET", "HEAD", "OPTIONS"]
+      target_origin_id = var.origin_id
 
-    forwarded_values {
-      query_string = false
-      headers      = ["Origin"]
+      forwarded_values {
+        query_string = false
+        headers      = ["Origin"]
 
-      cookies {
-        forward = "none"
+        cookies {
+          forward = "none"
+        }
       }
-    }
-    lambda_function_association {
-      event_type   = "viewer-request"
-      include_body = false
-      lambda_arn   = var.stop_search_robots_arn
-    }
+      lambda_function_association {
+        event_type   = "viewer-request"
+        include_body = false
+        lambda_arn   = var.stop_search_robots_arn
+      }
 
-    min_ttl                = 0
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    compress               = true
-    viewer_protocol_policy = "redirect-to-https"
+      min_ttl                = 0
+      default_ttl            = 86400
+      max_ttl                = 31536000
+      compress               = true
+      viewer_protocol_policy = "redirect-to-https"
+    }
   }
 
   price_class = var.price_class
