@@ -74,7 +74,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       lambda_function_association {
         event_type   = "viewer-request"
         include_body = false
-        lambda_arn   = lambda_function_association.value
+        lambda_arn   = ordered_cache_behavior.value
       }
 
       min_ttl                = 0
