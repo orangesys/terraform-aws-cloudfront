@@ -43,6 +43,12 @@ variable "acm_certificate_arn" {
 variable "web_acl_id" {
   description = "A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution."
   type        = string
+  default     = ""
+}
+
+variable "stop_search_robots_arn" {
+  type        = string
+  default     = ""
 }
 
 
