@@ -56,7 +56,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   dynamic "ordered_cache_behavior" {
-    count = var.stop_search_robots_arn != "" ? 1 : 0
+    for_each = var.stop_search_robots_arn != "" ? [var.stop_search_robots_arn] : []
     content {
       path_pattern     = "/robots.txt"
       allowed_methods  = ["GET", "HEAD", "OPTIONS"]
@@ -74,7 +74,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       lambda_function_association {
         event_type   = "viewer-request"
         include_body = false
-        lambda_arn   = var.stop_search_robots_arn
+        lambda_arn   = lambda_function_association.value
       }
 
       min_ttl                = 0
